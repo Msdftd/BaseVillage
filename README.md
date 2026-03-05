@@ -81,26 +81,18 @@ npm run dev
 
 **Deploy order:**
 
-| # | Contract           | Constructor Args              |
-|---|--------------------|-------------------------------|
-| 1 | VillageLandNFT.sol | None                          |
-| 2 | BuildingNFT.sol    | None                          |
-| 3 | VillageUpgrade.sol | BuildingNFT deployed address  |
+| # | Contract           | Address                                      |
+|---|--------------------|----------------------------------------------|
+| 1 | VillageLandNFT     | `0xd47B80a7b7d2BA20638149D3ddaDa38a4c9918e2` |
+| 2 | BuildingNFT        | `0x989350C2933d0c5C287A1A3B2795E6146Fcb0F27` |
+| 3 | VillageUpgrade     | `0x6413249437Ec0dB7BA056e11E836c0698D5a5794` |
 
-5. Copy deployed addresses into `.env.local`:
-```
-NEXT_PUBLIC_VILLAGE_LAND_NFT=0x_YOUR_ADDRESS
-NEXT_PUBLIC_BUILDING_NFT=0x_YOUR_ADDRESS
-NEXT_PUBLIC_VILLAGE_UPGRADE=0x_YOUR_ADDRESS
-```
+Contracts are **LIVE** on Base Mainnet. View on BaseScan:
+- [VillageLandNFT](https://basescan.org/address/0xd47B80a7b7d2BA20638149D3ddaDa38a4c9918e2)
+- [BuildingNFT](https://basescan.org/address/0x989350C2933d0c5C287A1A3B2795E6146Fcb0F27)
+- [VillageUpgrade](https://basescan.org/address/0x6413249437Ec0dB7BA056e11E836c0698D5a5794)
 
-6. Also update `lib/wagmi.js` → `CONTRACTS` object
-
-### Enable Real Transactions
-
-In `pages/dashboard.jsx`, find the build handler and:
-- Comment out the demo/simulation block
-- Uncomment: `build(sel, c, r);`
+Contracts are already connected. Just add your WalletConnect ID to `.env.local` and run.
 
 ---
 
