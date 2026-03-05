@@ -29,7 +29,7 @@ export default function FarcasterApp() {
   useEffect(() => {
     async function init() {
       try {
-        const mod = await import("@farcaster/miniapp-sdk");
+        const mod = await import("@farcaster/frame-sdk");
         const farcasterSdk = mod.sdk;
         setSdk(farcasterSdk);
 
