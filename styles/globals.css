@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root { --base-blue:#0052FF; --bg:#060B18; --green:#22C55E; --amber:#F59E0B; --purple:#8B5CF6; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Plus Jakarta Sans",sans-serif; background:var(--bg); color:#e2e8f0; -webkit-font-smoothing:antialiased; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.08); border-radius:3px; }
+.glass { background:rgba(255,255,255,0.025); backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,0.06); }
+.glow-blue { box-shadow:0 0 30px rgba(0,82,255,0.15); }
+@keyframes plop { 0%{transform:scale(0);opacity:0} 60%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
+@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.anim-plop { animation:plop .4s cubic-bezier(.34,1.56,.64,1) both; }
+.anim-up { animation:fadeUp .6s ease both; }
+.tx-spinner { border:3px solid rgba(0,82,255,0.2); border-top-color:#0052FF; border-radius:50%; width:48px; height:48px; animation:spin 1s linear infinite; }
