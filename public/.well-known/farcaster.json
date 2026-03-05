@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "BaseVillage",
+    "iconUrl": "https://base-village.vercel.app/icon.png",
+    "homeUrl": "https://base-village.vercel.app/app",
+    "imageUrl": "https://base-village.vercel.app/og-image.png",
+    "buttonTitle": "🏘️ Build Village",
+    "splashImageUrl": "https://base-village.vercel.app/splash.png",
+    "splashBackgroundColor": "#060B18",
+    "webhookUrl": "https://base-village.vercel.app/api/webhook"
+  }
+}
