@@ -35,40 +35,51 @@ export default function Dashboard() {
 
   const showNotif = (msg, type="success") => { setNotif({msg,type}); setTimeout(()=>setNotif(null), 3000); };
 
-  const handleBuild = useCallback(async (r, c) => {
-    if (!sel || grid[r][c] || showTxModal) return;
-    const building = BUILDINGS[sel];
-    setCurrentBuildType(sel);
-    setShowTxModal(true);
+  // Track pending build position
+  const [pendingCell, setPendingCell] = useState(null);
 
-    try {
-      // ═══ REAL TX: Uncomment below after deploying contracts ═══
-      // build(sel, c, r);
-
-      // ═══ DEMO MODE: Simulates transaction ═══
-      await new Promise(res => setTimeout(res, 2000));
-      const fakeHash = "0x" + Array.from({length:64}, ()=>Math.floor(Math.random()*16).toString(16)).join("");
-
+  // When tx succeeds, update grid
+  useEffect(() => {
+    if (isSuccess && hash && pendingCell) {
+      const { r, c, type } = pendingCell;
+      const building = BUILDINGS[type];
       const g = grid.map(row => [...row]);
-      g[r][c] = sel;
+      g[r][c] = type;
       setGrid(g);
       setPoints(p => p + building.points);
 
-      const shortHash = fakeHash.slice(0,10) + "..." + fakeHash.slice(-6);
+      const shortHash = hash.slice(0,10) + "..." + hash.slice(-6);
       setTxLog(prev => [{
-        type:sel, time:new Date().toLocaleTimeString(),
-        hash:shortHash, fullHash:fakeHash, r, c, points:building.points
+        type, time:new Date().toLocaleTimeString(),
+        hash:shortHash, fullHash:hash, r, c, points:building.points
       }, ...prev.slice(0,49)]);
 
       setShowTxModal(false);
       setCurrentBuildType(null);
+      setPendingCell(null);
       showNotif(`${building.emoji} ${building.name} built! +${building.points} pts`);
-    } catch (err) {
+    }
+  }, [isSuccess, hash]);
+
+  // When tx fails
+  useEffect(() => {
+    if (error && pendingCell) {
       setShowTxModal(false);
       setCurrentBuildType(null);
-      showNotif(err.message || "Transaction failed", "error");
+      setPendingCell(null);
+      showNotif(error.shortMessage || error.message || "Transaction failed", "error");
     }
-  }, [sel, grid, showTxModal]);
+  }, [error]);
+
+  const handleBuild = useCallback(async (r, c) => {
+    if (!sel || grid[r][c] || showTxModal) return;
+    setCurrentBuildType(sel);
+    setShowTxModal(true);
+    setPendingCell({ r, c, type: sel });
+
+    // Real blockchain transaction on Base Mainnet
+    build(sel, c, r);
+  }, [sel, grid, showTxModal, build]);
 
   if (!isConnected) return null;
 
