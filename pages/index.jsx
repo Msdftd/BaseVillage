@@ -12,6 +12,7 @@ export default function Home() {
       <Head>
         <title>BaseVillage — Build Your On-Chain Village on Base</title>
         <meta name="description" content="Build, grow, and trade in a living blockchain village on Base Mainnet. Every structure is an NFT." />
+        <meta name="base:app_id" content="69a97a3e223099cde83059d6" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="min-h-screen bg-[#060B18] text-slate-200">
